@@ -6,53 +6,49 @@ const TaskItem = ({ task, onEdit }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center border p-3 rounded-2xl shadow bg-white gap-3 mt-8">
-      
+    <div className="flex flex-col sm:flex-row sm:items-center bg-white shadow-lg border border-gray-300 rounded-2xl px-6 py-5 my-6 gap-5">
       {/* Left Section */}
-      <div className="flex-1 flex items-start gap-3">
-        {/* Done/Undo Button */}
+      <div className="flex-1 flex items-center gap-4">
+
         <button
           onClick={() => dispatch(toggleTask(task.id))}
-          className={`p-2 rounded-full transition-colors duration-200 ${
+          className={`p-3 rounded-full transition-colors duration-200 shrink-0 ${
             task.completed
               ? "bg-gray-500 hover:bg-gray-600"
               : "bg-blue-500 hover:bg-blue-600"
-          } text-white`}
+          } text-white text-lg`}
         >
           {task.completed ? <FaUndo /> : <FaCheck />}
         </button>
 
         {/* Task Details */}
-        <div>
+        <div className="flex flex-col">
           <h3
-            className={`font-bold ${
-              task.completed ? "line-through text-gray-500" : "" }`}
+            className={`font-bold text-lg ${
+              task.completed ? "text-gray-500" : "text-gray-800"
+            }`}
           >
             {task.title}
           </h3>
-          <p className="text-sm">{task.description}</p>
+          <p className="text-sm text-gray-600">{task.description}</p>
         </div>
       </div>
 
-      {/* Middle Section: Date */}
-      <div className="flex justify-center sm:w-32">
-        <span className="text-xs text-gray-500">{task.date}</span>
+      <div className="flex justify-center sm:w-40">
+        <span className="text-sm text-gray-500">{task.date}</span>
       </div>
 
-      {/* Right Section: Action Icons */}
-      <div className="flex flex-wrap gap-2 sm:justify-end">
-        {/* Edit */}
+      {/* Right Section */}
+      <div className="flex flex-wrap gap-3 sm:justify-end">
         <button
           onClick={() => onEdit(task)}
-          className="p-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full transition-colors duration-200"
+          className="p-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full transition-colors duration-200 text-lg"
         >
           <FaEdit />
         </button>
-
-        {/* Delete */}
         <button
           onClick={() => dispatch(deleteTask(task.id))}
-          className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors duration-200"
+          className="p-3 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors duration-200 text-lg"
         >
           <FaTrash />
         </button>
